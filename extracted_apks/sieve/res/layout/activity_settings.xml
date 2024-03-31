@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/settings_list" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_alignParentTop="true">
+        <TextView android:textSize="20.0sp" android:gravity="center_vertical" android:id="@id/text_view_settings_pinchange" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/text_view_settings_pinchange" android:layout_weight="0.05" android:onClick="changePIN" android:textIsSelectable="true" />
+        <TextView android:textSize="20.0sp" android:gravity="center_vertical" android:id="@id/text_view_settings_delete" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/text_view_settings_delete" android:layout_weight="0.05" android:onClick="deleteAll" android:textIsSelectable="true" />
+        <TextView android:textSize="20.0sp" android:gravity="center_vertical" android:id="@id/text_view_settings_sd" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/text_view_settings_sd" android:layout_weight="0.05" android:onClick="backupToSD" android:textIsSelectable="true" />
+        <TextView android:textSize="20.0sp" android:gravity="center_vertical" android:id="@id/text_view_settings_net" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/text_view_settings_net" android:layout_weight="0.05" android:onClick="backupToNet" android:textIsSelectable="true" />
+        <TextView android:textSize="20.0sp" android:gravity="center_vertical" android:id="@id/text_view_settings_restore" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/text_view_settings_restore" android:layout_weight="0.05" android:onClick="restoreFromSD" android:textIsSelectable="true" />
+        <TextView android:textSize="20.0sp" android:gravity="center_vertical" android:id="@id/text_view_settings_netrestore" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/text_view_settings_netrestore" android:layout_weight="0.05" android:onClick="restoreFromNet" android:textIsSelectable="true" />
+    </LinearLayout>
+</RelativeLayout>

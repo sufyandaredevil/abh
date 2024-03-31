@@ -1,0 +1,91 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android)
+SHA1-Digest-Manifest: U9lBexWjup2138fXAuo6E5n2EvA=
+
+Name: res/layout/activity_settings.xml
+SHA1-Digest: AYM2icrygBOhjOMUgSjhvXKoiCk=
+
+Name: res/drawable-xhdpi/ic_launcher.png
+SHA1-Digest: eH472O6xwpaBmpKIQYyTVkCDKDk=
+
+Name: res/drawable-hdpi/ic_launcher.png
+SHA1-Digest: RQsQl4DwQjzszf8PIKApVeCIfWQ=
+
+Name: res/xml/prefrences.xml
+SHA1-Digest: sLH054BzonJUG7qxMUsgy85UeJg=
+
+Name: res/menu/activity_add_entry_add.xml
+SHA1-Digest: t9Ran56+Kwk1pfkYvc7kLCqC+7U=
+
+Name: res/layout/activity_welcome.xml
+SHA1-Digest: jx7WSNtjmS9ykQk/sTdtNpx0u/Y=
+
+Name: resources.arsc
+SHA1-Digest: JuRSY0sg8Ewzfwwrh+eLcPQwjdI=
+
+Name: res/drawable-ldpi/ic_launcher.png
+SHA1-Digest: ASG8EFox8DCeX9QcBfWC+YTT9Ag=
+
+Name: lib/armeabi/libencrypt.so
+SHA1-Digest: kTuFy0v4qWDcY3tXtZy7z4fRvmA=
+
+Name: AndroidManifest.xml
+SHA1-Digest: Rh4KbWgCneD/Ip9Ulp8gJhtDuJ8=
+
+Name: res/layout/activity_file_select.xml
+SHA1-Digest: SCNIQvfcbJbb85zjaI6zlOeMxhQ=
+
+Name: res/menu/activity_main_login.xml
+SHA1-Digest: Nf6bb/KVLaZgv0uxHlkyO9EoJ6Q=
+
+Name: lib/armeabi/gdbserver
+SHA1-Digest: 3/ibuQ3l7rLZEtCwe17a4sDkC2A=
+
+Name: res/menu/activity_file_select.xml
+SHA1-Digest: cCk7crf1vwDpnIGGp2f5jA5G6Ig=
+
+Name: res/layout/activity_short_login.xml
+SHA1-Digest: aw/AUOwAhoTmZrlyHDcMKKrmFR4=
+
+Name: res/layout/activity_main_login.xml
+SHA1-Digest: Axj5Ix7A2q7LLJs95nGgyEpneFs=
+
+Name: res/menu/activity_welcome.xml
+SHA1-Digest: AyJuAvKZh5aqSdIRhzOqAcBuUHE=
+
+Name: res/menu/activity_pwlist.xml
+SHA1-Digest: dCiTz71Vcf+q/iruF7oo7uKhlu0=
+
+Name: res/layout/format_pwlist.xml
+SHA1-Digest: txDBktSKSZSBMtSszEWimlwXWZ0=
+
+Name: classes.dex
+SHA1-Digest: 2xWGM+9op7Jk2DtUgfsZ3Aal+7s=
+
+Name: res/layout/activity_add_entry.xml
+SHA1-Digest: 1OgV0wEoJmDOXqwLqvmwrZGht+c=
+
+Name: lib/armeabi/libdecrypt.so
+SHA1-Digest: r3X66ui/IXVYjVcDS2Cx4eb4m0w=
+
+Name: res/menu/activity_settings.xml
+SHA1-Digest: i63V7b0oUTDNdglvdCL7opDyqTU=
+
+Name: res/drawable-mdpi/ic_launcher.png
+SHA1-Digest: BCMBXCw7BUbXQzWamvckLWSy9S0=
+
+Name: res/menu/activity_add_entry_edit.xml
+SHA1-Digest: 2bHrdFK2f+DzZCSyHvJLboOiTi0=
+
+Name: res/layout/activity_pwlist.xml
+SHA1-Digest: 8N8QmwNLNeaQKLIv9uja/7IGEAA=
+
+Name: res/menu/activity_short_login.xml
+SHA1-Digest: KXbBx9L/uM4LhxjlAndaYPBmHck=
+
+Name: res/menu/activity_pin.xml
+SHA1-Digest: dYWQgaQDSW1KDEco4xcf0hPsBT8=
+
+Name: res/layout/activity_pin.xml
+SHA1-Digest: QdMjYqp0eYrRsw/3nEctgbBDLjg=
+

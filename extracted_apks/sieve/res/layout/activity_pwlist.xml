@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListView android:id="@id/pwlist_list_pwlist" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+    <TextView android:id="@id/pwlist_textview_prompt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/text_view_pwlist_prompt" android:layout_below="@id/pwlist_list_pwlist" android:layout_centerHorizontal="true" />
+</RelativeLayout>
