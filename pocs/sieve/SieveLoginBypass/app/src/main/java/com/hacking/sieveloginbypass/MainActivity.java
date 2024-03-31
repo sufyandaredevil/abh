@@ -1,5 +1,5 @@
+// this is created in android studio with the template "empty activity"
 package com.hacking.sieveloginbypass;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;

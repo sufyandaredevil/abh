@@ -1,10 +1,13 @@
+### STUFFS TAUGHT:
+  - Abusing exported(explicit) and implicit(intents) activities
+
 ### GENERAL COMMANDS:
   - show running ports in linux: `netstat -tulpen`
+  - unzip .apk file: `unzip <file.apk>`
   - telnetting into AVD(one created with android studio):
     - `telnet 127.0.0.1:5554`
     - `auth <auth token excluding the % delimiter (location will be printed)>`
     - `help [command]`
-  - unzip .apk file: `unzip <file.apk>`
 
 ### ADB COMMANDS:
   - print available devices: `adb devices`
@@ -24,9 +27,9 @@
   - list apks installed: `pm list packages`
   - print path of an android package installed: `pm path <packagename>`
   - input text to device: `input text <your_text>`
-  - start an activity: `am start-activity -n <package_uuid>/<activity_name>`
-    - example: `am start-activity -n com.mwr.example.sieve/.FileSelectorActivity`
-    - NOTE: possible only if activity is exported or if an intent is encapsulated
+  - start an activity: `am start-activity -n <package_name>/<activity_name>`
+    - Example: `am start-activity -n com.mwr.example.sieve/.FileSelectorActivity`
+    - **NOTE**: `<package_name>` & `<activity_name>` can be found inside the decompiled **AndroidManifest.xml** file obtained using **apktool**. Also this is possible only if activity is exported(explicit) or if an intent(implicit) is encapsulated
 
 ### APKTOOL COMMANDS:
   - decompile apk using apktool: `apktool d <filename.apk>`
