@@ -32,8 +32,9 @@
     - **NOTE**:
       - `<package_name>` & `<activity_name>` can be found inside the decompiled **AndroidManifest.xml** file obtained using **apktool**.
       - This is possible only if activity is exported(explicit) or if an intent(implicit) is encapsulated
-      - A formal way to trigger this intent is to create an app and start the activity as follows:
+      - A formal way to trigger this activity is to create an app and start it as follows:
         > ```java
+        > // following code is also present at .\pocs\sieve\SieveLoginBypass
         > // "empty activity" template selected in android studio
         > package com.hacking.sieveloginbypass;
         > import androidx.appcompat.app.AppCompatActivity;
