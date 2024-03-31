@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.mwr.example.sieve">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <permission android:label="Allows reading of the Key in Sieve" android:name="com.mwr.example.sieve.READ_KEYS" android:protectionLevel="dangerous"/>
+    <permission android:label="Allows editing of the Key in Sieve" android:name="com.mwr.example.sieve.WRITE_KEYS" android:protectionLevel="dangerous"/>
+    <application android:allowBackup="true" android:debuggable="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme">
+        <activity android:clearTaskOnLaunch="true" android:excludeFromRecents="true" android:exported="true" android:finishOnTaskLaunch="true" android:label="@string/title_activity_file_select" android:name=".FileSelectActivity"/>
+        <activity android:excludeFromRecents="true" android:label="@string/app_name" android:launchMode="singleTask" android:name=".MainLoginActivity" android:windowSoftInputMode="adjustResize|stateVisible">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:clearTaskOnLaunch="true" android:excludeFromRecents="true" android:exported="true" android:finishOnTaskLaunch="true" android:label="@string/title_activity_pwlist" android:name=".PWList"/>
+        <activity android:clearTaskOnLaunch="true" android:excludeFromRecents="true" android:finishOnTaskLaunch="true" android:label="@string/title_activity_settings" android:name=".SettingsActivity"/>
+        <activity android:clearTaskOnLaunch="true" android:excludeFromRecents="true" android:finishOnTaskLaunch="true" android:label="@string/title_activity_add_entry" android:name=".AddEntryActivity"/>
+        <activity android:clearTaskOnLaunch="true" android:excludeFromRecents="true" android:finishOnTaskLaunch="true" android:label="@string/title_activity_short_login" android:name=".ShortLoginActivity"/>
+        <activity android:clearTaskOnLaunch="true" android:excludeFromRecents="true" android:finishOnTaskLaunch="true" android:label="@string/title_activity_welcome" android:name=".WelcomeActivity"/>
+        <activity android:clearTaskOnLaunch="true" android:excludeFromRecents="true" android:finishOnTaskLaunch="true" android:label="@string/title_activity_pin" android:name=".PINActivity"/>
+        <service android:exported="true" android:name=".AuthService" android:process=":remote"/>
+        <service android:exported="true" android:name=".CryptoService" android:process=":remote"/>
+        <provider android:authorities="com.mwr.example.sieve.DBContentProvider" android:exported="true" android:multiprocess="true" android:name=".DBContentProvider">
+            <path-permission android:path="/Keys" android:readPermission="com.mwr.example.sieve.READ_KEYS" android:writePermission="com.mwr.example.sieve.WRITE_KEYS"/>
+        </provider>
+        <provider android:authorities="com.mwr.example.sieve.FileBackupProvider" android:exported="true" android:multiprocess="true" android:name=".FileBackupProvider"/>
+    </application>
+</manifest>

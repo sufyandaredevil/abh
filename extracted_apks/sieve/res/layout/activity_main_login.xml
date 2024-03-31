@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button android:id="@id/mainlogin_button_login" android:paddingLeft="32.0dip" android:paddingRight="32.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/action_sign_in_register" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" android:onClick="login" />
+    <EditText android:id="@id/mainlogin_edittext_entry" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/prompt_password" android:maxLines="1" android:ems="10" android:singleLine="true" android:layout_alignParentLeft="true" android:layout_centerVertical="true" android:inputType="textPassword" android:imeOptions="actionUnspecified|normal" android:imeActionLabel="@string/action_sign_in_short" android:imeActionId="@id/login" />
+    <TextView android:textAppearance="?android:textAppearanceMedium" android:id="@id/mainlogin_textview_prompt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/login_progress_signing_in" android:layout_below="@id/edit_text_main_password" android:layout_centerHorizontal="true" android:fontFamily="sans-serif-light" />
+</RelativeLayout>
