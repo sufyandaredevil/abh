@@ -1,0 +1,90 @@
+Manifest-Version: 1.0
+Created-By: 1.0 (Android)
+
+Name: res/drawable-xhdpi/ic_launcher.png
+SHA1-Digest: sf6BxycuyoKN6tC4rSUoLfnmD/c=
+
+Name: res/layout/activity_settings.xml
+SHA1-Digest: NnBIg5B5oOdgYhelXcp1MJpy+x8=
+
+Name: res/drawable-hdpi/ic_launcher.png
+SHA1-Digest: CUAMZ4kgxNyHWyU1KUcCymE03YA=
+
+Name: res/xml/prefrences.xml
+SHA1-Digest: U8XyVk1NY6MfAMNSXse+ER0esQI=
+
+Name: res/menu/activity_add_entry_add.xml
+SHA1-Digest: tAp3Kme9VP0xjJbm7ixxORwlCyo=
+
+Name: res/layout/activity_welcome.xml
+SHA1-Digest: 5vJUe0FRflPgzfQrhoOGkbGjwXo=
+
+Name: resources.arsc
+SHA1-Digest: hJGuQ7Sqhcfv1cuXhEQP/q2f4jU=
+
+Name: lib/armeabi/libencrypt.so
+SHA1-Digest: Hpof0tEHNIoUWjWMYqGq7ry40KE=
+
+Name: res/drawable-ldpi/ic_launcher.png
+SHA1-Digest: u20dsuzjrIgAOJBWGOGM8WPr3Vs=
+
+Name: AndroidManifest.xml
+SHA1-Digest: 4CiVVYHJTObHm4dl+sN9ymIP55k=
+
+Name: res/layout/activity_file_select.xml
+SHA1-Digest: u/2JLT9Tn36mIAgkL70Iu/Zs9Ns=
+
+Name: res/menu/activity_main_login.xml
+SHA1-Digest: GBJlENOAyMHaXLes/u9BO+snydE=
+
+Name: lib/armeabi/gdbserver
+SHA1-Digest: JzZ2/Kb7L0m+LNYMUrSzbJCdo5g=
+
+Name: res/menu/activity_file_select.xml
+SHA1-Digest: CydRAcLzAGBuebeYyYRjrasYCYs=
+
+Name: res/layout/activity_short_login.xml
+SHA1-Digest: V/f2WVPDOQuVr2WB5ZJ8aGzwy20=
+
+Name: res/layout/activity_main_login.xml
+SHA1-Digest: 8wbzAyEsvP90BdaTAXDFcIV9GXQ=
+
+Name: res/menu/activity_welcome.xml
+SHA1-Digest: CydRAcLzAGBuebeYyYRjrasYCYs=
+
+Name: res/menu/activity_pwlist.xml
+SHA1-Digest: QOAtnS6EazzpDvXGwSH5b23JloA=
+
+Name: res/layout/format_pwlist.xml
+SHA1-Digest: wGih5QPYI1S5mZG8Mc99TxADBBs=
+
+Name: classes.dex
+SHA1-Digest: vF9++J+GM32oAzMN+bPawJRCJUI=
+
+Name: res/layout/activity_add_entry.xml
+SHA1-Digest: Q0tDLc1PxL+mWr9siPcUb1qU/Qs=
+
+Name: lib/armeabi/libdecrypt.so
+SHA1-Digest: M4AQ6KWfHXDJilBfboqL+9gWmt8=
+
+Name: res/menu/activity_settings.xml
+SHA1-Digest: CydRAcLzAGBuebeYyYRjrasYCYs=
+
+Name: res/menu/activity_add_entry_edit.xml
+SHA1-Digest: k2WetJz+7NT8D/IHq3pnZm4+Zec=
+
+Name: res/drawable-mdpi/ic_launcher.png
+SHA1-Digest: JDyBePTSt0nRFDa6Bc7BKYU5oLI=
+
+Name: res/layout/activity_pwlist.xml
+SHA1-Digest: gGwQnPQJLTFmiGkzelEQBOzo0Jg=
+
+Name: res/menu/activity_short_login.xml
+SHA1-Digest: CydRAcLzAGBuebeYyYRjrasYCYs=
+
+Name: res/menu/activity_pin.xml
+SHA1-Digest: CydRAcLzAGBuebeYyYRjrasYCYs=
+
+Name: res/layout/activity_pin.xml
+SHA1-Digest: 0ycVCwSSX3x7bB6xVPsYW9+3S8g=
+
