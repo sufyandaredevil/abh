@@ -1,6 +1,7 @@
 ### STUFFS TAUGHT:
   - Abusing exported(explicit) and implicit(intents) activities
   - Intent Sniffing
+  - Broadcast receiver hacking
 
 ### GENERAL COMMANDS:
   - show running ports in linux: `netstat -tulpen`
@@ -26,11 +27,12 @@
 
 ### ADB SHELL COMMANDS (commands to be executed inside the android device's shell):
   - list apks installed: `pm list packages`
+  - list apks installed with its UID(user id): `pm list packages -U`
   - print path of an android package installed: `pm path <packagename>`
   - input text to device: `input text <your_text>`
   - start an activity (implicit intent): `am start-activity -a <action_name> -c <category_name>`
     - Example: `am start-activity -a com.apphacking.changePin -c "android.intent.category.DEFAULT"`
-  - start an activity with key and values(of a string) passed to an implicit intent: `am start-activity -a <action_name> -c <category_name> --es "<key>" "<value>"`
+  - start an activity with key and value(of a string) passed to an implicit intent: `am start-activity -a <action_name> -c <category_name> --es "<key>" "<value>"`
     - Example: `am start-activity -a com.apphacking.changePin -c "android.intent.category.DEFAULT" --es "username" "admin"`
     - **NOTE**: In case there are multiple applications that could react to this intent, the device shows a list of apps the user can forward the request to
   - start an activity (explicit intent): `am start-activity -n <package_name>/.<activity_name>`
@@ -66,6 +68,14 @@
         >  }
         > }
         > ```
+  - Trigger a broadcast event as a different user: `am broadcast --user <uid> -a <action_name>`
+  - Trigger a broadcast event with key and value(of a string): `am broadcast -a <action_name> --es "<key>" "<value>"`
+  - Trigger a broadcast event: `am broadcast -a <action_name>`
+    - Example: `am -a android.intent.action.BOOT_COMPLETED`
+    - **NOTE**:
+      - Doing this artificially will let all applications receive the action triggered if a broadcast receiver is setup in code or in the AndroidManifest.xml file
+      - Some broadcast event needs root permission to be triggered
+      - As mentioned previously, we need a poc application for demonstration if a vulnerability is present(refer pocs/BroadcastHacking/ source)
 
 ### APKTOOL COMMANDS:
   - decompile apk using apktool: `apktool d <filename.apk>`
