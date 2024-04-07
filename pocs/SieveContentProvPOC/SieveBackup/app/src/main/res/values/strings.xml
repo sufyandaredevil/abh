@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SieveBackup</string>
+    <string name="perm_descr">Allows editing of the Key in Sieve</string>
+</resources>

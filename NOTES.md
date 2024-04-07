@@ -5,7 +5,7 @@
 
 ### GENERAL COMMANDS:
   - show running ports in linux: `netstat -tulpen`
-  - unzip .apk file: `unzip <file.apk>`
+  - unzip .apk file: `unzip <file>.apk`
   - telnetting into AVD(one created with android studio):
     - `telnet 127.0.0.1:5554`
     - `auth <auth token excluding the % delimiter (location will be printed)>`
@@ -21,7 +21,7 @@
   - port reversing: `adb reverse tcp:<src_android_port> tcp:<dest_pc_port>`
   - push a file: `adb [-s <device_name>] push <file> /sdcard/ | <dest>`
   - kill adb server: `adb kill-server`
-  - install apk: `adb install <filename.apk>`
+  - install apk: `adb install <filename>.apk`
   - pull a file: `adb pull <file> <dest>`
   - print logcat: `adb logcat`
 
@@ -76,6 +76,8 @@
       - Doing this artificially will let all applications receive the action triggered if a broadcast receiver is setup in code or in the AndroidManifest.xml file
       - Some broadcast event needs root permission to be triggered
       - As mentioned previously, we need a poc application for demonstration if a vulnerability is present(refer pocs/BroadcastHacking/ source)
+  - Query content provider: `content query --uri content://<authority>/<table>/<row>`
+    - Example: `content query --uri content://com.android.contacts/contacts/2`
 
 ### APKTOOL COMMANDS:
   - decompile apk using apktool: `apktool d <filename.apk>`
@@ -87,6 +89,7 @@
     - location of Android/data folder (non rooted); `/sdcard/Android/data` 
     - location of Android/data folder (rooted); `/storage/emulator/0/Android/data` 
     - using sharedprefs object in code used to create contents inside `/data/data/<app_dir>` that is only accessible by root or the application itself
+    - databases created using the SQLiteOpenHelper class are present in: `/data/data/<package>/db/<database_name>.db`
   - **ADB COMMANDS**:
     - hidden folder in linux: `/home/$(whoami)/.android/`
   - cryptography key verification: pub key in `/home/$(whoami)/.android/adbkey.pub` present in pc and pub key in `/data/misc/adb/adb_keys` present in android device(readable only if rooted) must be equal
