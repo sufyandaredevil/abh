@@ -2,6 +2,8 @@
   - Abusing exported(explicit) and implicit(intents) activities
   - Intent Sniffing
   - Broadcast receiver hacking
+  - Content Provider SQL Injection
+  - Content Provider Path Traversal Attack
 
 ### GENERAL COMMANDS:
   - show running ports in linux: `netstat -tulpen`
