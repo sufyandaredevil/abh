@@ -80,6 +80,9 @@
       - As mentioned previously, we need a poc application for demonstration if a vulnerability is present(refer pocs/BroadcastHacking/ source)
   - Query content provider: `content query --uri content://<authority>/<table>/<row>`
     - Example: `content query --uri content://com.android.contacts/contacts/2`
+  - Read a file using a content provider: `content read --uri content://<authority>/<context_directory>/<filename>`
+    - **NOTE**: There's a possibility of a path traversal attack if (../)* pattern is used and if not sanitized in the code side which would eventually lead to gain access to a file that was not intended to be accessed(refer pocs/MusicPlayerPathTraversalPOC/ source)
+
 
 ### APKTOOL COMMANDS:
   - decompile apk using apktool: `apktool d <filename.apk>`
