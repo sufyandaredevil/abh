@@ -83,10 +83,26 @@
   - Read a file using a content provider: `content read --uri content://<authority>/<context_directory>/<filename>`
     - **NOTE**: There's a possibility of a path traversal attack if (../)* pattern is used and if not sanitized in the code side which would eventually lead to gain access to a file that was not intended to be accessed(refer pocs/MusicPlayerPathTraversalPOC/ source)
 
-
 ### APKTOOL COMMANDS:
-  - decompile apk using apktool: `apktool d <filename.apk>`
+  - decompile apk using apktool: `apktool d <filename>.apk`
   - build apk using apktool: `apktool b <folder_path>/`
+
+### KEYTOOL, ZIPALIGN, JARSIGNER, APKSIGNER:
+  - Modifying and application(apk) Signing Approach:
+    - decompile apk using `apktool d <filename>.apk` and perform the modifications
+    - For android version **< 11**:
+      - Create a new keystore: `keytool -genkey -v -keystore ~/<user_defined_keystore_filename>.keystore -alias <user_defined_alias_name> -keyalg RSA -keysize 2048 -validity 365`
+        - **NOTE**: Here the <user_defined_alias_name> is the reference to the certificate, so therfore a single keystore can have multiple certificates
+      - Signing the App: `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ~/<user_defined_keystore_filename>.keystore <apk_name>.apk <user_defined_alias_name>`
+      - To rectify offsets: `zipalign -v 4 <apk_name>.apk <output_apk_name>.apk`
+    - For android version **>= 11**:
+      - Create a new keystore: `keytool -genkey -v -keystore ~/<user_defined_keystore_filename>.keystore -alias <user_defined_alias_name> -keyalg RSA -keysize 2048 -validity 365`
+      - To rectify offsets: `zipalign -v 4 <apk_name>.apk <output_apk_name>.apk`
+      - Signing the App: `apksigner sign --ks-key-alias <user_defined_alias_name> -ks ~/<user_defined_keystore_filename>.keystore <output_apk_name>.apk`
+    - Uninstall the apk from the android device and perform fresh install using `adb install <output_apk_name>.apk`
+      - **NOTE**: Modified APK installation might be blocked by Play Protect so make sure to click **<kbd>INSTALL ANYWAY</kbd>** in the android device
+  - Print values from the keystore: `keytool -list -keystore <keystore_filename>.keystore`
+  - Print cert present in `<decompiled_apk_folder>/base/dist/out/original/META-INF/`: `keytool -printcert -file <ALIAS_NA>.RSA`
 
 ### MISC NOTES:
   - **ADB SHELL COMMANDS**:
