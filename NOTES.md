@@ -4,17 +4,41 @@
   - Broadcast receiver hacking
   - Content Provider SQL Injection
   - Content Provider Path Traversal Attack
+  - Reversing Engineering APKS
+  - SMALi Code Patching(Logic flipping, Erasing, Label Patching)
 
-### GENERAL COMMANDS:
+### LINKS / TOOLS:
+  - [dex2jar](https://github.com/DexPatcher/dex2jar)
+  - [dex2jar](https://github.com/DexPatcher/dex2jar)
+  - [jd-gui](http://java-decompiler.github.io/)
+  - [jadx](https://github.com/skylot/jadx/releases/tag/v1.4.7)
+  - [Eclipse IDE](https://eclipseide.org/)
+  - [Androguard](https://androguard.readthedocs.io/en/latest/intro/installation.html)
+  - [Gephi](https://gephi.org/)
+  - **keytool** (comes with android studio's build-tools)
+  - **zigaligner** (comes with android studio's build-tools)
+  - **keytool** (comes with jdk)
+
+### LOCATIONS TOREM:
+  - `~\.android`
+  - `~\AppData\Local\Android`
+  - `~\AndroidStudioProjects`
+  - `~\AppData\Local\Google\AndroidStudio*`
+
+### GENERAL COMMANDS/TOREM:
   - show running ports in linux: `netstat -tulpen`
   - unzip .apk file: `unzip <file>.apk`
   - telnetting into AVD(one created with android studio):
     - `telnet 127.0.0.1:5554`
     - `auth <auth token excluding the % delimiter (location will be printed)>`
     - `help [command]`
+  - list all emulators available: `emulator -list-avds`
+    - `emulator` location:
+      - 🪟: `~\AppData\Local\Android\Sdk\emulator`
+      - 🐧: `~\Android\Sdk\emulator`
 
 ### ADB COMMANDS:
-  - print available devices: `adb devices`
+  - print attached devices: `adb devices [-l]`
   - ways to connect to an android device with adb:
     - `adb shell` 
     - `adb -s <serial number from "adb devices" command>`
@@ -24,6 +48,7 @@
   - push a file: `adb [-s <device_name>] push <file> /sdcard/ | <dest>`
   - kill adb server: `adb kill-server`
   - install apk: `adb install <filename>.apk`
+    - `-t` flag to install test packages
   - pull a file: `adb pull <file> <dest>`
   - print logcat: `adb logcat`
 
@@ -83,16 +108,12 @@
   - Read a file using a content provider: `content read --uri content://<authority>/<context_directory>/<filename>`
     - **NOTE**: There's a possibility of a path traversal attack if (../)* pattern is used and if not sanitized in the code side which would eventually lead to gain access to a file that was not intended to be accessed(refer pocs/MusicPlayerPathTraversalPOC/ source)
 
-### APKTOOL COMMANDS:
-  - decompile apk using apktool: `apktool d <filename>.apk`
-  - build apk using apktool: `apktool b <folder_path>/`
-
-### KEYTOOL, ZIPALIGN, JARSIGNER, APKSIGNER:
+### KEYTOOL, ZIPALIGN, JARSIGNER, APKSIGNER COMMANDS:
   - Modifying and application(apk) Signing Approach:
     - decompile apk using `apktool d <filename>.apk` and perform the modifications
     - For android version **< 11**:
       - Create a new keystore: `keytool -genkey -v -keystore ~/<user_defined_keystore_filename>.keystore -alias <user_defined_alias_name> -keyalg RSA -keysize 2048 -validity 365`
-        - **NOTE**: Here the <user_defined_alias_name> is the reference to the certificate, so therfore a single keystore can have multiple certificates
+        - **NOTE**: Here the <user_defined_alias_name> is the reference to the certificate, therefore a single keystore can have multiple certificates
       - Signing the App: `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ~/<user_defined_keystore_filename>.keystore <apk_name>.apk <user_defined_alias_name>`
       - To rectify offsets: `zipalign -v 4 <apk_name>.apk <output_apk_name>.apk`
     - For android version **>= 11**:
@@ -104,6 +125,40 @@
   - Print values from the keystore: `keytool -list -keystore <keystore_filename>.keystore`
   - Print cert present in `<decompiled_apk_folder>/base/dist/out/original/META-INF/`: `keytool -printcert -file <ALIAS_NA>.RSA`
 
+### APK REVERSE ENGINEERING COMMANDS:
+  - STEPS:  `unzip <file_name>.apk` > decompile: `dex2jar classes.dex` > open with: `jd-gui classes-dex2jar.jar`  
+    (OR)
+  - STEPS: open <file_name>.apk with `jadx*`  
+    (OR)
+  - STEPS: apktool d <file_name>.apk
+  - **APKTOOL COMMANDS**(smali output):
+    - disassemble apk using apktool: `apktool d <filename>.apk`
+    - build apk using apktool: `apktool b <folder_path>/`
+  - **JADX, JADX-GUI COMMANDS**(java output):
+    - decompile in cli: `jadx <file_name>.apk --loglevel ERROR`
+    - decompile in gui: `jadx-gui <file_name>.apk`
+  - **DEX2JAR, JD-GUI COMMANDS**:
+    - decompile classes.dex to *.jar using dex2jar: `dex2jar classes.dex`
+      - original script name: `d2j-dex2jar.bat`
+    - open *.jar using jd-gui: `jd-gui class classes-dex2jar.jar`
+  - **ANDROGUARD COMMANDS**:
+    - analyze apk: `androguard analyze <file_name>.apk`
+    - decompile apk: `androguard decompile <file_name>.apk`
+    - decompile apk mentioning limit, output format in png: `androguard decompile -o <output_folder> -f png --limit '^Lcom/mobisec' <file_name>.apk`
+      - **NOTE**: It is recommended to open the output image file using gimp in linux or similar alternative in windows
+    - create a call graph for given apk: `androguard cg -o <output_filename>.gml <file_name>.apk`
+
+### SMALi TOREM :
+  - Smali output created by apktool separates placeholders as `local`(starting with v1 since v0 is used for the `this` operator) and `parameter`(starting with p1 since p0 is used for the `this` operator) register.
+  - Constructor is created in smali even if not explicitly mentioned in code
+  - when an instance field(data/class members that ain't static) is initialized with values it is represented differently in smali. For example: if `int a=1` is an integer variable, in smali it would be `int a` and then `a=1` and that too making use of smali's local or parameter registers for intermediate moves
+  - Comments in smali output generated by the apktool:
+    - `#direct methods` are used for private methods and constructors
+    - `#virtual methods` are used for public and protected methods
+  - SMALi opcodes:
+    - `invoke-direct` - used for calling constructors and private methods
+    - `invoke-virtual` - used for calling public and protected methods
+
 ### MISC NOTES:
   - **ADB SHELL COMMANDS**:
     - location of start folder in android devices(non rooted): `/sdcard/`
@@ -111,6 +166,4 @@
     - location of Android/data folder (rooted); `/storage/emulator/0/Android/data` 
     - using sharedprefs object in code used to create contents inside `/data/data/<app_dir>` that is only accessible by root or the application itself
     - databases created using the SQLiteOpenHelper class are present in: `/data/data/<package>/db/<database_name>.db`
-  - **ADB COMMANDS**:
-    - hidden folder in linux: `/home/$(whoami)/.android/`
   - cryptography key verification: pub key in `/home/$(whoami)/.android/adbkey.pub` present in pc and pub key in `/data/misc/adb/adb_keys` present in android device(readable only if rooted) must be equal
