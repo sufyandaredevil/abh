@@ -208,5 +208,5 @@
     - location of Android/data folder (rooted); `/storage/emulator/0/Android/data` 
     - using sharedprefs object in code used to create contents inside `/data/data/<app_dir>` that is only accessible by root or the application itself
     - databases created using the SQLiteOpenHelper class are present in: `/data/data/<package>/db/<database_name>.db`
-  - AVD setup using Android Studio supports the following architectures: x86,armeabi-v7a,armeabi
+  - AVD setup using Android Studio supports the following architectures: `x86`, `armeabi-v7a`, `armeabi`
   - cryptography key verification: pub key in `/home/$(whoami)/.android/adbkey.pub` present in pc and pub key in `/data/misc/adb/adb_keys` present in android device(readable only if rooted) must be equal
