@@ -3,4 +3,4 @@
 ### NOTE:
   - Had issues while setting up necessary tools in linux, so switched to windows
   - As a result OS specific notes like commands, locations will all be included for 🪟 but only a few for 🐧
-  - Some commands that are mentioned are sometimes alias(set up in env) of the orginal file/script's name and not the real name(only a few are mentioned in the notes) but are semantically correct
+  - Commands that are mentioned are sometimes alias(set up in env) of the orginal file/script's name(only a few are mentioned in the notes) but are semantically equivalent
