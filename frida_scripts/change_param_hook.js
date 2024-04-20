@@ -1,5 +1,5 @@
 //Application to hook: ../apks/Privacyfriendlydicer.apk
-//Script that hook int rollDice(int poolSize, int faceNum), print param values and return
+//Script that hooks int rollDice(int poolSize, int faceNum), print param values and return
 
 Java.perform(function () {
   //Get a reference in myDicer of the class "Dicer"
@@ -11,8 +11,8 @@ Java.perform(function () {
     send("Parameter 2 = " + param2);
 
     //calling the original method and return
-    // return this.rollDice(param1, param2);
-    return this.rollDice(4,3);
+    return this.rollDice(param1, param2);
+    //here's where param1, param2 can be modified
   }
 
 });

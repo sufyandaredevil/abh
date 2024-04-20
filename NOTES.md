@@ -7,6 +7,8 @@
   - Reversing Engineering APKS
   - SMALi Code Patching(Logic flipping, Erasing, Label Patching)
 
+---
+
 ### LINKS / TOOLS:
   - [dex2jar](https://github.com/DexPatcher/dex2jar)
   - [dex2jar](https://github.com/DexPatcher/dex2jar)
@@ -21,11 +23,15 @@
   - **zigaligner** (comes with android studio's build-tools)
   - **keytool** (comes with jdk)
 
+---
+
 ### LOCATIONS TOREM:
   - `~\.android`
   - `~\AppData\Local\Android`
   - `~\AndroidStudioProjects`
   - `~\AppData\Local\Google\AndroidStudio*`
+
+---
 
 ### GENERAL COMMANDS/TOREM:
   - show running ports in linux: `netstat -tulpen`
@@ -110,6 +116,8 @@
   - Read a file using a content provider: `content read --uri content://<authority>/<context_directory>/<filename>`
     - **NOTE**: There's a possibility of a path traversal attack if (../)* pattern is used and if not sanitized in the code side which would eventually lead to gain access to a file that was not intended to be accessed(refer pocs/MusicPlayerPathTraversalPOC/ source)
 
+---
+
 ### KEYTOOL, ZIPALIGN, JARSIGNER, APKSIGNER COMMANDS:
   - Modifying and application(apk) Signing Approach:
     - decompile apk using `apktool d <filename>.apk` and perform the modifications
@@ -161,29 +169,25 @@
     - `invoke-direct` - used for calling constructors and private methods
     - `invoke-virtual` - used for calling public and protected methods
 
-### FRIDA CLIENT & SERVER SETUP:
+---
+
+### FRIDA CLIENT & SERVER SETUP(for ROOTED devices):
   - `pip install` the frida client in pc
   - `adb push` frida server to the respective(make use of `adb shell getprop ro.product.cpu.abilist` to know the server's architecture) android device to `/data/local/tmp`directory (only directory that can execute binaries), `chmod` it to `+x`, `sudo` run it and check whether the cursor stays or blinks which denotes successful running of the server
   - Now using `frida-ps -U` we can check whether the client is able to connect with the server
-
-### FRIDA CLIENT COMMANDS:
-  - List all processes running in the server: `frida-ps -U`
-  - Hook to given application: `frida -U <package_identifer>`
-    - Example: `frida -U com.apphacking.aes`
-  - Hook to given application and load script: `frida -U <package_identifer> -l <script_name>`
-    - Example: `frida -U com.apphacking.aes -l param_hook.js`
-
 
 ### FRIDA HOOKING:
   - Get the package identifier: `frida-ps -U`
   - Hook the app: `frida -U <package_identifer>`
     - Example:`frida -U com.apphacking.aes`
   - Know a bit about [Android Activity Lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle)
+  - Now we've just started what's called as **frida-client REPL** (unofficial cause I made this up)
   - Paste the following frida script and hit enter. The purpose of the script is that it logs the `onResume()` method(method names can be found using JADX or any other decompilers) calls made in the hooked Android application before calling its original implementation
     ```js
-    //Java.perform() Attaches current thread to the JVM and execute the function passed as an arg
+    //Java.perform() Attaches current thread to the JVM and execute the function passed as an argument
     Java.perform(function() {
       //Retrieves a reference to the Activity class from the Android SDK
+      //Example: if our <package_identifer_name> is com.hacking.demoapp that has a class DemoClass, we need to create an object we Java.use(): 'com.hacking.demoapp.DemoClass'
       const Activity = Java.use('android.app.Activity');
       //Overrides the onResume() method of the Activity class with a custom implementation
       Activity.onResume.implementation = function () {
@@ -191,6 +195,8 @@
         send('onResume() got called! Let\'s call the original implementation');
         //Calls the original implementation of the onResume() method for the current instance of the Activity class
         this.onResume();
+        //return something if the original function returns something
+        //return <context>;
         };
       });
     ```
@@ -198,8 +204,31 @@
   ```sh
   [Android Emulator 5554::<package_id> ]-> message: {'type': 'send', 'payload': "onResume() got called! Let's call the original implementation"} data: None
   ```
-  
   - [For more](https://frida.re/docs/javascript-api/)
+
+### FRIDA, FRIDA-PS CLIENT COMMANDS:
+  - List all processes running in the server: `frida-ps -U`
+  - Hook to given application: `frida -U <package_identifer>`
+    - Example: `frida -U com.apphacking.aes`
+  - Hook to given application and load script: `frida -U <package_identifer> -l <script_name>`
+    - Example: `frida -U com.apphacking.aes -l param_hook.js`
+  - Start app from frida client inserting a breakpoint on launch and load script: `frida -U -f <package_identifier> -l <script_name> --pause`
+    - Example: `frida -U -f com.secuso.privacyfriendlydicer -l param_hook.js --pause`
+
+### FRIDA-CLIENT REPL COMMANDS:
+- Script's code can be executed directly here
+- To resume execution - `%resume`
+
+### FRIDA SCRIPTS:
+- [Hook target class function and Modify parameters](./frida_scripts/change_param_hook.js)
+- [Return value modification](./frida_scripts/return_value_modify.js)
+- [Call static method](./frida_scripts/static_method_call.js) (After loading script we can use the function name `increaseLevel()` in frida-client REPL)
+  - **NOTE**: During live debugging, UI elements wouldn't be updated on modifying values but will in memory unless explicit code has been added(in our case we haven't) in the script
+- [Creating a new Object and Calling instance method](./frida_scripts/instance_method_call.js)
+  - **NOTE**: Creating an object and calling methods over it are only gonna make changes in it instead of the primary object we're targeting. And here we've done exactly that
+- [Existing Instance Searching and Modification](./frida_scripts/existing_instance_modification.js)
+
+---
 
 ### MISC NOTES:
   - **ADB SHELL COMMANDS**:
