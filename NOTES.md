@@ -6,6 +6,7 @@
   - Content Provider Path Traversal Attack
   - Reversing Engineering APKS
   - SMALi Code Patching(Logic flipping, Erasing, Label Patching)
+  - Dynamic Instrumentation using Frida Framework
 
 ---
 
