@@ -204,9 +204,9 @@
       });
     ```
   - Now lets trigger the `onResume()` method we need to put the app in background and reopen it which inturn prints the following message in the terminal:
-  ```sh
-  [Android Emulator 5554::<package_id> ]-> message: {'type': 'send', 'payload': "onResume() got called! Let's call the original implementation"} data: None
-  ```
+    ```sh
+    [Android Emulator 5554::<package_id> ]-> message: {'type': 'send', 'payload': "onResume() got called! Let's call the original implementation"} data: None
+    ```
   - Click [here](https://frida.re/docs/javascript-api/) for more
 
 ### FRIDA, FRIDA-PS CLIENT COMMANDS:
