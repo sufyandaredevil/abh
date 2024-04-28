@@ -118,29 +118,15 @@
 
 ---
 
-### KEYTOOL, ZIPALIGN, JARSIGNER, APKSIGNER COMMANDS:
-  - Modifying and application(apk) Signing Approach:
-    - decompile apk using `apktool d <filename>.apk` and perform the modifications
-    - For android version **< 11**:
-      - Create a new keystore: `keytool -genkey -v -keystore ~/<user_defined_keystore_filename>.keystore -alias <user_defined_alias_name> -keyalg RSA -keysize 2048 -validity 365`
-        - **NOTE**: Here the <user_defined_alias_name> is the reference to the certificate, therefore a single keystore can have multiple certificates
-      - Signing the App: `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ~/<user_defined_keystore_filename>.keystore <apk_name>.apk <user_defined_alias_name>`
-      - To rectify offsets: `zipalign -v 4 <apk_name>.apk <output_apk_name>.apk`
-    - For android version **>= 11**:
-      - Create a new keystore: `keytool -genkey -v -keystore ~/<user_defined_keystore_filename>.keystore -alias <user_defined_alias_name> -keyalg RSA -keysize 2048 -validity 365`
-      - To rectify offsets: `zipalign -v 4 <apk_name>.apk <output_apk_name>.apk`
-      - Signing the App: `apksigner sign --ks-key-alias <user_defined_alias_name> -ks ~/<user_defined_keystore_filename>.keystore <output_apk_name>.apk`
-    - Uninstall the apk from the android device and perform fresh install using `adb install <output_apk_name>.apk`
-      - **NOTE**: Modified APK installation might be blocked by Play Protect so make sure to click **<kbd>INSTALL ANYWAY</kbd>** in the android device
-  - Print values from the keystore: `keytool -list -keystore <keystore_filename>.keystore`
-  - Print cert present in `<decompiled_apk_folder>/base/dist/out/original/META-INF/`: `keytool -printcert -file <ALIAS_NA>.RSA`
+### APK REVERSE ENGINEERING WORKFLOW:
+  - Following are some typical workflows mentioned:
+    - <ins>METHOD 1</ins>:  `unzip <file_name>.apk` > decompile: `dex2jar classes.dex` > open with: `jd-gui classes-dex2jar.jar`  
+    - <ins>METHOD 2</ins>: `jadx -d <output_folder_name> <package_name>.apk` > Create new java project in `ECLIPSE`(rest all options set to default and clean **src/** folder) > drag and drop all files present inside `<output_folder_name>/sources/*` selecting `Copy files and folders` option (useful to find contextful java class, variable and method names)
+    - <ins>METHOD 3</ins>: open <file_name>.apk with `jadx*`  
+    - <ins>METHOD 4</ins>: apktool d <file_name>.apk
+  - Next follow [these](#keytool-zipalign-jarsigner-apksigner-commands) steps for apk signing and apk bundling
 
-### APK REVERSE ENGINEERING COMMANDS:
-  - STEPS:  `unzip <file_name>.apk` > decompile: `dex2jar classes.dex` > open with: `jd-gui classes-dex2jar.jar`  
-    (OR)
-  - STEPS: open <file_name>.apk with `jadx*`  
-    (OR)
-  - STEPS: apktool d <file_name>.apk
+### APKTOOL, JADX, DEX2JAR, JD, ANDROGUARD COMMANDS:
   - **APKTOOL COMMANDS**(smali output):
     - disassemble apk using apktool: `apktool d <filename>.apk`
     - build apk using apktool: `apktool b <folder_path>/`
@@ -158,14 +144,31 @@
       - **NOTE**: It is recommended to open the output image file using gimp in linux or similar alternative in windows
     - create a call graph for given apk: `androguard cg -o <output_filename>.gml <file_name>.apk`
 
-### SMALi TOREM :
+### KEYTOOL, ZIPALIGN, JARSIGNER, APKSIGNER COMMANDS:
+  - Modifying and application(apk) Signing Approach:
+    - decompile apk using `apktool d <filename>.apk` and perform the modifications
+    - For android version **< 11**:
+      - Create a new keystore: `keytool -genkey -v -keystore ~/<user_defined_keystore_filename>.keystore -alias <user_defined_alias_name> -keyalg RSA -keysize 2048 -validity 365`
+        - **NOTE**: Here the <user_defined_alias_name> is the reference to the certificate, therefore a single keystore can have multiple certificates
+      - Signing the App: `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ~/<user_defined_keystore_filename>.keystore <apk_name>.apk <user_defined_alias_name>`
+      - To rectify offsets: `zipalign -v 4 <apk_name>.apk <output_apk_name>.apk`
+    - For android version **>= 11**:
+      - Create a new keystore: `keytool -genkey -v -keystore ~/<user_defined_keystore_filename>.keystore -alias <user_defined_alias_name> -keyalg RSA -keysize 2048 -validity 365`
+      - To rectify offsets: `zipalign -v 4 <apk_name>.apk <output_apk_name>.apk`
+      - Signing the App: `apksigner sign --ks-key-alias <user_defined_alias_name> -ks ~/<user_defined_keystore_filename>.keystore <output_apk_name>.apk`
+    - Uninstall the apk from the android device and perform fresh install using `adb install <output_apk_name>.apk`
+      - **NOTE**: Modified APK installation might be blocked by Play Protect so make sure to click **<kbd>INSTALL ANYWAY</kbd>** in the android device
+  - Print values from the keystore: `keytool -list -keystore <keystore_filename>.keystore`
+  - Print cert present in `<decompiled_apk_folder>/base/dist/out/original/META-INF/`: `keytool -printcert -file <ALIAS_NA>.RSA`
+
+### SMALI TOREM :
   - Smali output created by apktool separates placeholders as `local`(starting with v1 since v0 is usually used for the `this` operator) and `parameter`(starting with p1 since p0 is usually used for the `this` operator) register.
   - Constructor is created in smali even if not explicitly mentioned in code
   - when an instance field(data/class members that ain't static) is initialized with values it is represented differently in smali. For example: if `int a=1` is an integer variable, in smali it would be `int a` and then `a=1` and that too making use of smali's local or parameter registers for intermediate moves
   - Comments in smali output generated by the apktool:
     - `#direct methods` are used for private methods and constructors
     - `#virtual methods` are used for public and protected methods
-  - SMALi opcodes:
+  - SMALI opcodes:
     - `invoke-direct` - used for calling constructors and private methods
     - `invoke-virtual` - used for calling public and protected methods
 
@@ -187,7 +190,7 @@
     //Java.perform() Attaches current thread to the JVM and execute the function passed as an argument
     Java.perform(function() {
       //Retrieves a reference to the Activity class from the Android SDK
-      //Example: if our <package_identifer_name> is com.hacking.demoapp that has a class DemoClass, we need to create an object we Java.use(): 'com.hacking.demoapp.DemoClass'
+      //Example: if our <package_name> is com.hacking.demoapp that has a class DemoClass, we need to create an object we Java.use(): 'com.hacking.demoapp.DemoClass'
       const Activity = Java.use('android.app.Activity');
       //Overrides the onResume() method of the Activity class with a custom implementation
       Activity.onResume.implementation = function () {
@@ -204,7 +207,7 @@
   ```sh
   [Android Emulator 5554::<package_id> ]-> message: {'type': 'send', 'payload': "onResume() got called! Let's call the original implementation"} data: None
   ```
-  - [For more](https://frida.re/docs/javascript-api/)
+  - Click [here](https://frida.re/docs/javascript-api/) for more
 
 ### FRIDA, FRIDA-PS CLIENT COMMANDS:
   - List all processes running in the server: `frida-ps -U`
@@ -220,13 +223,15 @@
 - To resume execution - `%resume`
 
 ### FRIDA SCRIPTS:
-- [Hook target class function and Modify parameters](./frida_scripts/change_param_hook.js)
+- [Hook target class function, change its implementation by modifying parameters](./frida_scripts/change_param_hook.js) (here we just print them)
 - [Return value modification](./frida_scripts/return_value_modify.js)
-- [Call static method](./frida_scripts/static_method_call.js) (After loading script we can use the function name `increaseLevel()` in frida-client REPL)
+- [Calling static method](./frida_scripts/static_method_call.js) (After loading script we can use the function name `increaseLevel()` in frida-client REPL)
   - **NOTE**: During live debugging, UI elements wouldn't be updated on modifying values but will in memory unless explicit code has been added(in our case we haven't) in the script
 - [Creating a new Object and Calling instance method](./frida_scripts/instance_method_call.js)
   - **NOTE**: Creating an object and calling methods over it are only gonna make changes in it instead of the primary object we're targeting. And here we've done exactly that
 - [Existing Instance Searching and Modification](./frida_scripts/existing_instance_modification.js)
+- [Function Overloading](./frida_scripts/function_overloading.js)
+- **NOTE**: Frida scripts might not work in cases where we have an android device which has custom or proprietary libraries that are not being supported by frida framework at the moment but maybe in the future, so to check whether there's a problem with the script or the target android device try testing it on an android VM
 
 ---
 
