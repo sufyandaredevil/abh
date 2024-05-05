@@ -199,7 +199,7 @@
         send('onResume() got called! Let\'s call the original implementation');
         //Calls the original implementation of the onResume() method for the current instance of the Activity class
         this.onResume();
-        //return something if the original function returns something
+        //return if the original function returns any context
         //return <context>;
         };
       });
