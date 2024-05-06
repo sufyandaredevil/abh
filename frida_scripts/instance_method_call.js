@@ -1,4 +1,4 @@
-//Application to hook: ../apks/fridaFunc.apk
+//Target Application: ../apks/fridaFunc.apk
 
 Java.perform(function () { 
   var playerClassReference = Java.use('com.apphacking.fridafunc.Player');

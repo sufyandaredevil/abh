@@ -223,7 +223,7 @@
 - Script's code can be executed directly here
 - To resume execution - `%resume`
 
-### FRIDA SCRIPTS:
+### FRIDA SCRIPTS: (⚠️: Make sure to read all NOTE as they make sense in general and not for just the script)
 - [Hook target class function, change its implementation by modifying parameters](./frida_scripts/change_param_hook.js) (here we just print them)
 - [Return value modification](./frida_scripts/return_value_modify.js)
 - [Calling static method](./frida_scripts/static_method_call.js) (After loading script we can use the function name `increaseLevel()` in frida-client REPL)
@@ -232,7 +232,10 @@
   - **NOTE**: Creating an object and calling methods over it are only gonna make changes in it instead of the primary object we're targeting. And here we've done exactly that
 - [Existing Instance Searching and Modification](./frida_scripts/existing_instance_modification.js)
 - [Function Overloading](./frida_scripts/function_overloading.js)
-- **NOTE**: Frida scripts might not work in cases where we have an android device which has custom or proprietary libraries that are not being supported by frida framework at the moment but maybe in the future, so to check whether there's a problem with the script or the target android device try testing it on an android VM
+  - **NOTE**: Frida scripts might not work in cases where we have an android device which has custom or proprietary libraries that are not being supported by frida framework at the moment but maybe in the future, so to check whether there's a problem with the script or the target android device try testing it out on other android devices or VMs
+- [Passing Class Instance as a Parameter](./frida_scripts/instance_as_param.js)
+- [Passing Existing Class Instance as a Parameter](./frida_scripts/existing_instance_as_param.js)
+- [Hooking and Overloading Constructor](./frida_scripts/hooking_constructors.js)
 
 ---
 

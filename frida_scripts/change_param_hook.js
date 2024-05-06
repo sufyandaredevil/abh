@@ -1,4 +1,4 @@
-//Application to hook: ../apks/Privacyfriendlydicer.apk
+//Target Application: ../apks/Privacyfriendlydicer.apk
 //Script that hooks int rollDice(int poolSize, int faceNum), print param values and return
 
 Java.perform(function () {

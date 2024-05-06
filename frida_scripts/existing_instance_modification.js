@@ -1,4 +1,4 @@
-//Application to hook: ../apks/fridaFunc.apk
+//Target Application: ../apks/fridaFunc.apk
 
 Java.perform(function () {
   //Java.choose(<app_identifier>.<class_name>, callback) scans the application memory space for existing instances of the Player Class

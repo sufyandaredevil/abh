@@ -1,4 +1,4 @@
-//Application to hook: Not available
+//Target Application: Not available
 //Script that demonstrates function overloading
 
 Java.perform(function () {

@@ -1,4 +1,4 @@
-//Application to hook: ../apks/fridaFunc.apk
+//Target Application: ../apks/fridaFunc.apk
 
 //function created for easy retrieval in frida-client REPL by calling: increaseLevel()
 function increaseLevel(){
