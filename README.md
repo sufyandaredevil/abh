@@ -1,4 +1,5 @@
-### Repo contains [NOTES](./NOTES.md) taken from Android App Hacking - Black Belt Edition along with APKS(compiled & decompiled), source files & POCs
+### Repo contains [NOTES](./NOTES.md) taken from [Android App Hacking - Black Belt Edition](https://www.udemy.com/course/android-app-hacking-black-belt-edition/) along with APKS(compiled & decompiled), source files & POCs
+
 
 ### NOTE:
   - Had issues while setting up necessary tools in linux, so switched to windows
