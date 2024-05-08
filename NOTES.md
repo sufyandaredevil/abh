@@ -224,6 +224,7 @@
 - To resume execution - `%resume`
 
 ### FRIDA NDK HOOKING:
+  - To know about the General NDK instrumentation workflow view [REVERSING WITH GHIDRA](#reversing-with-ghidra)
   - NDK Libraries are directly called in a java program by first including them(`static { System.loadLibrary("native-lib); }`) followed by setting up the prototype (`public native String encryptString(String pass, int round);`) and then calling them(`encryptString(password, round);`)
   - The native function implemented in C/C++ always starts with 2 default arguments. For example the above shown `encryptString()`'s definition would be as follows:
     >```c
@@ -259,12 +260,18 @@
 - [NDK Hooking (EASY)](./frida_scripts/ndk_easy.js)
 - [NDK Hooking (HARD)](./frida_scripts/ndk_hard.js)
 - [Hook NDK function, change its implementation by modifying parameters and typecasting](./frida_scripts/ndk_mod_param.js)
-  - **NOTE**: Typecasting varies for some types for different architectures
-- [Hooking a specific C function (after using Ghidra)](./frida_scripts/hooking_c.js)
+  - **NOTE**: Typecasting for different architectures varies for some types
+- [Hooking C Library Function (after Ghidra Reconnaissance)](./frida_scripts/hooking_c.js)
+- [Hooking C Library Function at a specific offset (after Ghidra Reconnaissance)](./frida_scripts/hooking_spec_offset_c.js)
 
 ---
 
 ### REVERSING WITH GHIDRA:
+- NDK reversing workflow:
+  - Decompile apk
+  - Choose which architecture you wanna work with
+  - Create a project in Ghidra and add a project folder
+  - Make a copy of the architecture specific *.so file into the project folder and start reversing
 - When reversing ARM 32 or 64 bit click yes to perform code analysis and make sure the following options are checked:
   - [x] ARM Aggressive Instruction Finder
   - [x] Decompile Parameter ID
