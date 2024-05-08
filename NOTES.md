@@ -265,7 +265,7 @@
 ---
 
 ### REVERSING WITH GHIDRA:
-- When reversing ARM 32 or 64 bit click yes to perform analysis and make sure the following options are checked:
+- When reversing ARM 32 or 64 bit click yes to perform code analysis and make sure the following options are checked:
   - [x] ARM Aggressive Instruction Finder
   - [x] Decompile Parameter ID
 - In case of x86_64:
