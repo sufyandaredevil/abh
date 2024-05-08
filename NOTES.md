@@ -7,6 +7,7 @@
   - Reversing Engineering APKS
   - SMALi Code Patching(Logic flipping, Erasing, Label Patching)
   - Dynamic Instrumentation using Frida Framework
+  - Reverse Engineering using Ghidra(scratched the surface)
 
 ---
 
@@ -207,7 +208,7 @@
     ```sh
     [Android Emulator 5554::<package_id> ]-> message: {'type': 'send', 'payload': "onResume() got called! Let's call the original implementation"} data: None
     ```
-  - Click [here](https://frida.re/docs/javascript-api/) for more
+  - [More](https://frida.re/docs/javascript-api/)
 
 ### FRIDA, FRIDA-PS CLIENT COMMANDS:
   - List all processes running in the server: `frida-ps -U`
@@ -234,10 +235,12 @@
       - JNI interface/environment pointer: args[0]
       -  this object : args[1]
       - and the expected parameters(password and rotation) args[2], args[3] and so on if any
+  - To perform this hooking we follow the same procedure done when instrumenting java code using `frida -U <package_name>.apk` 
   - When referring arguments during frida instrumentation we use the above indices to perform necessary operations
   - This native code would be present within arch specific folder inside `extracted_apk/.../lib/<arch_specific>/<native_library_files_here>.so`
   - Some variables returned from native code needs to be typecasted within frida script
-  - For code refer [this](./frida_scripts/ndk_hard.js)
+  - Overwriting if done using `Interceptor.attach()` would mess up the loaded scripts in frida-client so its better to close and re-start the application 
+  - [Code](./frida_scripts/ndk_hard.js)
 
 ### FRIDA SCRIPTS: (⚠️ Make sure to read all NOTE as they make sense in general and not just for the script)
 - [Hook target class function, change its implementation by modifying parameters](./frida_scripts/change_param_hook.js) (here we just print them)
@@ -255,10 +258,19 @@
 - [Manipulating UI Thread](./frida_scripts/manipulate_ui_thread.js)
 - [NDK Hooking (EASY)](./frida_scripts/ndk_easy.js)
 - [NDK Hooking (HARD)](./frida_scripts/ndk_hard.js)
+- [Hook NDK function, change its implementation by modifying parameters and typecasting](./frida_scripts/ndk_mod_param.js)
+  - **NOTE**: Typecasting could vary for different native architectures
+- [Hooking a specific C function (after using Ghidra)](./frida_scripts/hooking_c.js)
 
 ---
 
-### MISC NOTES:
+### ARM REVERSING WITH GHIDRA:
+- Choose analyze ELF and following options needs to be checked:
+  - ARM Aggressive Instruction Finder
+  - Decompile Parameter ID
+
+
+### MISC:
   - **ADB SHELL COMMANDS**:
     - location of start folder in android devices(non rooted): `/sdcard/`
     - location of Android/data folder (non rooted); `/sdcard/Android/data` 
