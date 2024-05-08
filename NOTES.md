@@ -120,11 +120,10 @@
 ---
 
 ### APK REVERSE ENGINEERING WORKFLOW:
-  - Following are some typical workflows mentioned:
-    - <ins>METHOD 1</ins>:  `unzip <file_name>.apk` > decompile: `dex2jar classes.dex` > open with: `jd-gui classes-dex2jar.jar`  
-    - <ins>METHOD 2</ins>: `jadx -d <output_folder_name> <package_name>.apk` > Create new java project in `ECLIPSE`(rest all options set to default and clean **src/** folder) > drag and drop all files present inside `<output_folder_name>/sources/*` selecting `Copy files and folders` option (useful to find contextful java class, variable and method names)
-    - <ins>METHOD 3</ins>: open <file_name>.apk with `jadx*`  
-    - <ins>METHOD 4</ins>: apktool d <file_name>.apk
+  - <ins>METHOD 1</ins>:  `unzip <file_name>.apk` > decompile: `dex2jar classes.dex` > open with: `jd-gui classes-dex2jar.jar`  
+  - <ins>METHOD 2</ins>: `jadx -d <output_folder_name> <package_name>.apk` > Create new java project in `ECLIPSE`(rest all options set to default and clean **src/** folder) > drag and drop all files present inside `<output_folder_name>/sources/*` selecting `Copy files and folders` option (useful to find contextful java class, variable and method names)
+  - <ins>METHOD 3</ins>: open <file_name>.apk with `jadx*`  
+  - <ins>METHOD 4</ins>: apktool d <file_name>.apk
   - Next follow [these](#keytool-zipalign-jarsigner-apksigner-commands) steps for apk signing and apk bundling
 
 ### APKTOOL, JADX, DEX2JAR, JD, ANDROGUARD COMMANDS:
@@ -223,7 +222,24 @@
 - Script's code can be executed directly here
 - To resume execution - `%resume`
 
-### FRIDA SCRIPTS: (⚠️: Make sure to read all NOTE as they make sense in general and not for just the script)
+### FRIDA NDK HOOKING:
+  - NDK Libraries are directly called in a java program by first including them(`static { System.loadLibrary("native-lib); }`) followed by setting up the prototype (`public native String encryptString(String pass, int round);`) and then calling them(`encryptString(password, round);`)
+  - The native function implemented in C/C++ always starts with 2 default arguments. For example the above shown `encryptString()`'s definition would be as follows:
+    >```c
+    > Java_com_apphacking_ndkfrida_MainActivity_decryptString(JNIEnv* env, jobject, jstring password, int rotation){
+    > //implementation here
+    > }
+    >```
+    - Here:
+      - JNI interface/environment pointer: args[0]
+      -  this object : args[1]
+      - and the expected parameters(password and rotation) args[2], args[3] and so on if any
+  - When referring arguments during frida instrumentation we use the above indices to perform necessary operations
+  - This native code would be present within arch specific folder inside `extracted_apk/.../lib/<arch_specific>/<native_library_files_here>.so`
+  - Some variables returned from native code needs to be typecasted within frida script
+  - For code refer [this](./frida_scripts/ndk_hard.js)
+
+### FRIDA SCRIPTS: (⚠️ Make sure to read all NOTE as they make sense in general and not just for the script)
 - [Hook target class function, change its implementation by modifying parameters](./frida_scripts/change_param_hook.js) (here we just print them)
 - [Return value modification](./frida_scripts/return_value_modify.js)
 - [Calling static method](./frida_scripts/static_method_call.js) (After loading script we can use the function name `increaseLevel()` in frida-client REPL)
@@ -236,6 +252,9 @@
 - [Passing Class Instance as a Parameter](./frida_scripts/instance_as_param.js)
 - [Passing Existing Class Instance as a Parameter](./frida_scripts/existing_instance_as_param.js)
 - [Hooking and Overloading Constructor](./frida_scripts/hooking_constructors.js)
+- [Manipulating UI Thread](./frida_scripts/manipulate_ui_thread.js)
+- [NDK Hooking (EASY)](./frida_scripts/ndk_easy.js)
+- [NDK Hooking (HARD)](./frida_scripts/ndk_hard.js)
 
 ---
 
