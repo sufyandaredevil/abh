@@ -269,6 +269,7 @@
   - ARM Aggressive Instruction Finder
   - Decompile Parameter ID
 
+---
 
 ### MISC:
   - **ADB SHELL COMMANDS**:
