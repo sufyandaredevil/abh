@@ -259,15 +259,17 @@
 - [NDK Hooking (EASY)](./frida_scripts/ndk_easy.js)
 - [NDK Hooking (HARD)](./frida_scripts/ndk_hard.js)
 - [Hook NDK function, change its implementation by modifying parameters and typecasting](./frida_scripts/ndk_mod_param.js)
-  - **NOTE**: Typecasting could vary for different native architectures
+  - **NOTE**: Typecasting varies for some types for different architectures
 - [Hooking a specific C function (after using Ghidra)](./frida_scripts/hooking_c.js)
 
 ---
 
-### ARM REVERSING WITH GHIDRA:
-- Choose analyze ELF and following options needs to be checked:
-  - ARM Aggressive Instruction Finder
-  - Decompile Parameter ID
+### REVERSING WITH GHIDRA:
+- When reversing ARM 32 or 64 bit click yes to perform analysis and make sure the following options are checked:
+  - [x] ARM Aggressive Instruction Finder
+  - [x] Decompile Parameter ID
+- In case of x86_64:
+  - [x] Decompile Parameter ID
 
 ---
 
