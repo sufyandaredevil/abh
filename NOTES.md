@@ -162,7 +162,7 @@
   - Print values from the keystore: `keytool -list -keystore <keystore_filename>.keystore`
   - Print cert present in `<decompiled_apk_folder>/base/dist/out/original/META-INF/`: `keytool -printcert -file <ALIAS_NA>.RSA`
 
-### SMALI TOREM :
+### SMALI TOREM:
   - Smali output created by apktool separates placeholders as `local`(starting with v1 since v0 is usually used for the `this` operator) and `parameter`(starting with p1 since p0 is usually used for the `this` operator) register.
   - Constructor is created in smali even if not explicitly mentioned in code
   - when an instance field(data/class members that ain't static) is initialized with values it is represented differently in smali. For example: if `int a=1` is an integer variable, in smali it would be `int a` and then `a=1` and that too making use of smali's local or parameter registers for intermediate moves
@@ -243,7 +243,8 @@
   - Overwriting if done using `Interceptor.attach()` would mess up the loaded scripts in frida-client so its better to close and re-start the application 
   - [Code](./frida_scripts/ndk_hard.js)
 
-### FRIDA SCRIPTS: (⚠️ Make sure to read all NOTE as they make sense in general and not just for the script)
+### FRIDA SCRIPTS:
+(⚠️) `Make sure to read all NOTE as they make sense in general and not just for the script`
 - [Hook target class function, change its implementation by modifying parameters](./frida_scripts/change_param_hook.js) (here we just print them)
 - [Return value modification](./frida_scripts/return_value_modify.js)
 - [Calling static method](./frida_scripts/static_method_call.js) (After loading script we can use the function name `increaseLevel()` in frida-client REPL)
@@ -289,4 +290,4 @@
     - using sharedprefs object in code used to create contents inside `/data/data/<app_dir>` that is only accessible by root or the application itself
     - databases created using the SQLiteOpenHelper class are present in: `/data/data/<package>/db/<database_name>.db`
   - AVD setup using Android Studio supports the following architectures: `x86`, `armeabi-v7a`, `armeabi`
-  - cryptography key verification: pub key in `/home/$(whoami)/.android/adbkey.pub` present in pc and pub key in `/data/misc/adb/adb_keys` present in android device(readable only if rooted) must be equal
+  - Cryptography key verification: pub key in `/home/$(whoami)/.android/adbkey.pub` present in pc and pub key in `/data/misc/adb/adb_keys` present in android device(readable only if rooted) must be equal
