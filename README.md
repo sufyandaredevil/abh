@@ -15,3 +15,6 @@
 - [FRIDA-CLIENT REPL COMMANDS](./NOTES.md/#frida-client-repl-commands)
 - [FRIDA SCRIPTS](./NOTES.md/#frida-scripts)
 - [MISC](./NOTES.md/#misc)
+
+### MODULES YET TO FINISH:
+  - MITM
