@@ -5,7 +5,7 @@
   - As a result OS specific notes like commands, locations will all be included for 🪟 but only a few for 🐧
   - Commands that are mentioned are sometimes alias(set up in env) of the orginal file/script's name(only a few are mentioned in the notes) but are semantically equivalent
 
-### Table of Contents:
+### TABLE OF CONTENTS:
 - [LINKS/TOOLS](./NOTES.md/#links--tools)
 - [GENERAL COMMANDS](./NOTES.md/#general-commandstorem)
 - [ADB SHELL COMMANDS](./NOTES.md/#adb-shell-commands-commands-to-be-executed-inside-the-android-devices-shell)
@@ -16,5 +16,5 @@
 - [FRIDA SCRIPTS](./NOTES.md/#frida-scripts)
 - [MISC](./NOTES.md/#misc)
 
-### MODULES YET TO FINISH:
+### MODULE(S) YET TO FINISH:
   - MITM
