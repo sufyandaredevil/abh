@@ -224,7 +224,7 @@
 - To resume execution - `%resume`
 
 ### FRIDA NDK HOOKING:
-  - To know about the NDK instrumentation workflow view [REVERSING WITH GHIDRA](#reversing-with-ghidra)
+  - To know about the NDK reversing workflow view [REVERSING WITH GHIDRA](#reversing-with-ghidra)
   - NDK Libraries are directly called in a java program by first including them(`static { System.loadLibrary("native-lib); }`) followed by setting up the prototype (`public native String encryptString(String pass, int round);`) and then calling them(`encryptString(password, round);`)
   - The native function implemented in C/C++ always starts with 2 default arguments. For example the above shown `encryptString()`'s definition would be as follows:
     >```c
